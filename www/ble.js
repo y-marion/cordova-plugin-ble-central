@@ -71,13 +71,13 @@ module.exports = {
         cordova.exec(success, failure, 'BLE', 'stopScan', []);
     },
 
-    startScanWithOptions: function(services, options, success, failure) {
+    startScanWithOptions: function(services, options, success, failure, searchInBackground = true) {
         var successWrapper = function(peripheral) {
             convertToNativeJS(peripheral);
             success(peripheral);
         };
         options = options || {};
-        cordova.exec(successWrapper, failure, 'BLE', 'startScanWithOptions', [services, options]);
+        cordova.exec(successWrapper, failure, 'BLE', 'startScanWithOptions', [services, options, searchInBackground]);
     },
 
     // iOS only
@@ -100,13 +100,13 @@ module.exports = {
         cordova.exec(success, failure, 'BLE', 'list', []);
     },
 
-    connect: function (device_id, success, failure) {
+    connect: function (device_id, success, failure, autoDisconnect = false) {
         // wrap success so nested array buffers in advertising info are handled correctly
         var successWrapper = function(peripheral) {
             convertToNativeJS(peripheral);
             success(peripheral);
         };
-        cordova.exec(successWrapper, failure, 'BLE', 'connect', [device_id]);    
+        cordova.exec(successWrapper, failure, 'BLE', 'connect', [device_id, autoDisconnect]);    
     },
 
     autoConnect: function (deviceId, connectCallback, disconnectCallback) {

@@ -27,6 +27,7 @@
 @interface BLECentralPlugin : CDVPlugin <CBCentralManagerDelegate, CBPeripheralDelegate> {
     NSString* discoverPeripheralCallbackId;
     NSString* stateCallbackId;
+    NSMutableDictionary* autoDisconnectOnBackground;
     NSMutableDictionary* connectCallbacks;
     NSMutableDictionary *readCallbacks;
     NSMutableDictionary *writeCallbacks;
@@ -35,6 +36,7 @@
     NSMutableDictionary *stopNotificationCallbacks;
     NSMutableDictionary *connectCallbackLatches;
     NSMutableDictionary *readRSSICallbacks;
+    NSMutableDictionary *inBackground;
 }
 
 @property (strong, nonatomic) NSMutableSet *peripherals;
